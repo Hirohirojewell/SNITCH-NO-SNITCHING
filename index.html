@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Drop Game</title>
+    <style>
+        /* General Body Styling */
+        body {
+            text-align: center;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #4facfe, #00f2fe);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.8rem;
+            text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #fdfdfd;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Game Container Styling */
+        #game-container {
+            background: rgba(255, 255, 255, 0.1);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* Image Styling */
+        img {
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border: 6px solid #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        img:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border-color: #ffdf00;
+        }
+
+        /* Result Message Styling */
+        #result-message {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+
+        /* Styling for Different Outcomes */
+        .safe {
+            background: #4caf50;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.6);
+        }
+
+        .snitch {
+            background: #ff4f4f;
+            box-shadow: 0 5px 15px rgba(255, 79, 79, 0.6);
+        }
+
+        /* Fun Animation on Message */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Animation Trigger */
+        #result-message.animate {
+            animation: bounce 1s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Let see if you are a snitch or not 🎮</h1>
+    <p>Click the picture! Will you be Safe or a Snitch? 🤔</p>
+    
+    <div id="game-container">
+        <img src="picture.gif" alt="Click Me!" id="clickable-image">
+        <div id="result-message"></div>
+    </div>
+
+    <script>
+        const image = document.getElementById('clickable-image');
+        const resultMessage = document.getElementById('result-message');
+
+        function getRandomOutcome() {
+            return Math.random() < 0.5 ? 'Safe 👍' : 'You are a snitch 🖕';
+        }
+
+        image.addEventListener('click', () => {
+            const outcome = getRandomOutcome();
+            resultMessage.textContent = outcome;
+
+            // Add styling based on outcome
+            if (outcome.includes('Safe')) {
+                resultMessage.className = 'safe animate';
+            } else {
+                resultMessage.className = 'snitch animate';
+            }
+        });
+    </script>
+</body>
+</html>
